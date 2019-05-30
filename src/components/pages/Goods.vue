@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="navbar-div">
+		<div class="navbar-div" >
 			<van-nav-bar title="商品详情" left-text="返回" left-arrow @click-left="onClickLeft" />
 		</div>
 		<div class="topimage-div">
@@ -9,7 +9,11 @@
 		<div class="goods-name">{{goodsInfo.NAME}}</div>
 		<div class="goods-price">价格：{{goodsInfo.PRESENT_PRICE}}</div>
 		<div>
-			<van-tabs>
+		<!--
+			swipeable 滑动效果
+			sticky 吸顶效果
+		-->
+			<van-tabs swipeable sticky >
 				<van-tab title="商品详情">
 					<div class="detail" v-html="goodsInfo.DETAIL">
 
