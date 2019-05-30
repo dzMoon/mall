@@ -96,12 +96,13 @@ router.get("/getCategorySubList", async(ctx) => {
 	}
 })
 
-router.get("/getGoodsListByCategorySubID", async(ctx) => {
+router.post("/getGoodsListByCategorySubID", async(ctx) => {
 	try {
-		const Goods = mongoose.model("Goods")
-		let categorySubId = '2c9f6c946016ea9b016016f79c8e0000'
-		let result = await Goods.find({
-			SUB_ID: categorySubId
+		const CategorySub = mongoose.model("CategorySub")
+		let categoryId = ctx.request.body.categoryId
+		console.log(`接口getGoodsListByCategorySubID的入参:=====================${categoryId}========================`)
+		let result = await CategorySub.find({
+			MALL_CATEGORY_ID: categoryId
 		}).exec()
 		console.log(result)
 		ctx.body = {
