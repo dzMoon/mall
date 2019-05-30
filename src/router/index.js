@@ -1,20 +1,25 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import ShoppingMall from '@/components/pages/ShoppingMall'
-import Register from '@/components/pages/Register'
+import ShoppingMall from '@/components/pages/ShoppingMall' //商城首页
+import Register from '@/components/pages/Register' // 注册页面
+import Login from '@/components/pages/Login' // 登陆页面
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'ShoppingMall',
-      component: ShoppingMall
-    },
-    {
-      path: '/register',
-      name: 'Register',
-      component: Register
-    }
-  ]
+	routes: [{
+			path: '/',
+			name: 'ShoppingMall',
+			component: ShoppingMall
+		},
+		{
+			path: '/register',
+			name: 'Register',
+			component: Register
+		},
+		{
+			path: '/login',
+			name: 'Login',
+			component: Login
+		}
+	]
 })

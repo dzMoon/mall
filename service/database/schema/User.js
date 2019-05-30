@@ -21,6 +21,7 @@ const userSchema = new Schema({
 	}
 
 })
+
 //每次存储数据时都要执行
 userSchema.pre('save', function(next) {
 	//let user = this
@@ -34,6 +35,20 @@ userSchema.pre('save', function(next) {
 
 	})
 })
+
+userSchema.methods = {
+	/*_password 用户输入密码
+	 *password 数据库存储密码
+	 * */
+	comparePassword:(_password,password)=>{
+        return new Promise((resolve,reject)=>{
+            bcrypt.compare(_password,password,(err,isMatch)=>{
+                if(!err) resolve(isMatch)
+                else reject(err)
+            })
+        })
+    }
+}
 
 //发布模型
 mongoose.model('User', userSchema)
