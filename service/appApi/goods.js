@@ -58,4 +58,64 @@ router.post("/getDetailGoodsInfo", async(ctx) => {
 	}
 })
 
+router.get("/getCategoryList", async(ctx) => {
+	try {
+		const Category = mongoose.model("Category");
+		let result = await Category.find().exec()
+		console.log(result)
+		ctx.body = {
+			code: '200',
+			message: result
+		}
+		console.log(`getCategoryList接口出参:================={code:200, message:${JSON.stringify(result)}}=============`)
+	} catch(err) {
+		ctx.body = {
+			code: '500',
+			message: err
+		}
+		console.log(`查询导航列表失败,失败原因:=================${err}=============`)
+	}
+})
+
+router.get("/getCategorySubList", async(ctx) => {
+	try {
+		const CategorySub = mongoose.model("CategorySub");
+		let result = await CategorySub.find().exec()
+		console.log(result)
+		ctx.body = {
+			code: '200',
+			message: result
+		}
+		console.log(`getCategoryList接口出参:================={code:200, message:${JSON.stringify(result)}}=============`)
+	} catch(err) {
+		ctx.body = {
+			code: '500',
+			message: err
+		}
+		console.log(`查询导航列表失败,失败原因:=================${err}=============`)
+	}
+})
+
+router.get("/getGoodsListByCategorySubID", async(ctx) => {
+	try {
+		const Goods = mongoose.model("Goods")
+		let categorySubId = '2c9f6c946016ea9b016016f79c8e0000'
+		let result = await Goods.find({
+			SUB_ID: categorySubId
+		}).exec()
+		console.log(result)
+		ctx.body = {
+			code: '200',
+			message: result
+		}
+		console.log(`getCategoryList接口出参:================={code:200, message:${JSON.stringify(result)}}=============`)
+	} catch(err) {
+		ctx.body = {
+			code: '500',
+			message: err
+		}
+		console.log(`查询导航列表失败,失败原因:=================${err}=============`)
+	}
+})
+
 module.exports = router
