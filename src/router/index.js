@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import ShoppingMall from '@/components/pages/ShoppingMall' //商城首页
 import Register from '@/components/pages/Register' // 注册页面
 import Login from '@/components/pages/Login' // 登陆页面
+import Goods from '@/components/pages/Goods' // 商品详情页面
 Vue.use(Router)
 
 export default new Router({
@@ -20,6 +21,11 @@ export default new Router({
 			path: '/login',
 			name: 'Login',
 			component: Login
+		},
+		{
+			path: '/goods',
+			name: 'Goods',
+			component: Goods
 		}
 	]
 })

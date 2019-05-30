@@ -11,13 +11,18 @@ const {
 } = require('./database/init.js')
 
 let user = require('./appApi/user')
-
+let goods = require('./appApi/goods')
+let category = require('./appApi/category')
+let categorySub = require('./appApi/category_sub')
 app.use(bodyParser())
 app.use(cors())
 
 let router = new Router();
-router.use('/user', user.routes())
 
+router.use('/user', user.routes())
+router.use('/goods', goods.routes())
+router.use('/category', category.routes())
+router.use('/categorySub', categorySub.routes())
 app.use(router.routes())
 app.use(router.allowedMethods())
 
