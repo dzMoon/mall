@@ -21,6 +21,16 @@
 						</van-tab>
 					</van-tabs>
 				</div>
+				<div id="list-div">
+					<van-pull-refresh v-model="isRefresh" @refresh="onRefresh">
+						<van-list v-model="loading" :finished="finished" @load="onLoad">
+							<div class="list-item" v-for="item in list" :key="item">
+								{{item}}
+							</div>
+						</van-list>
+					</van-pull-refresh>
+
+				</div>
 			</van-col>
 		</van-row>
 	</div>
@@ -37,7 +47,11 @@
 				category: [],
 				categoryIndex: 0,
 				categorySub: [],
-				active:0
+				active: 0,
+				loading: false, //上啦加载使用
+				finished: false, //下拉加载是否没有数据
+				list: [],
+				isRefresh: false, //下拉加载
 
 			}
 		},
@@ -75,7 +89,6 @@
 			},
 			//根据大类ID读取小类类别列表
 			getGoodsListByCategorySubID(categoryId) {
-
 				axios({
 						url: url.getGoodsListByCategorySubID,
 						method: 'post',
@@ -94,11 +107,30 @@
 					.catch(error => {
 						console.log(error)
 					})
+			},
+			onLoad() {
+				setTimeout(() => {
+					for(let i = 0; i < 10; i++) {
+						this.list.push(this.list.length + 1)
+					}
+					this.loading = false;
+					if(this.list.length >= 40) {
+						this.finished = true;
+					}
+				}, 500)
+			},
+			onRefresh() {
+				setTimeout(() => {
+					this.isRefresh = false;
+					this.list = [];
+					this.onLoad()
+				}, 500);
 			}
 		},
 		mounted() {
 			let winHeight = document.documentElement.clientHeight
 			document.getElementById("leftNav").style.height = winHeight - 46 + 'px'
+			document.getElementById('list-div').style.height = winHeight - 90 + 'px'
 		}
 
 	}
@@ -116,5 +148,16 @@
 	.categoryActive {
 		background-color: #E4E7ED;
 		;
+	}
+	
+	.list-item {
+		text-align: center;
+		line-height: 80px;
+		border-bottom: 1px solid #f0f0f0;
+		background-color: #fff;
+	}
+	
+	#list-div {
+		overflow: scroll;
 	}
 </style>
