@@ -7,6 +7,7 @@ const URL = {
     loginUser:LOCALURL+'user/login',   //用户登陆接口
     getDetailGoodsInfo:LOCALURL+'goods/getDetailGoodsInfo',  //商品详情接口
     getCategoryList:LOCALURL+'goods/getCategoryList',         //得到大类信息
+    getCategorySubList:LOCALURL+'goods/getCategorySubList',   //得到小类列表
     getGoodsListByCategorySubID:LOCALURL+'goods/getGoodsListByCategorySubID'   //得到小类信息
 
 }
