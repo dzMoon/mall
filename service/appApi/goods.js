@@ -58,4 +58,73 @@ router.post("/getDetailGoodsInfo", async(ctx) => {
 	}
 })
 
+router.get("/getCategoryList", async(ctx) => {
+	try {
+		const Category = mongoose.model("Category");
+		let result = await Category.find().exec()
+		console.log(result)
+		ctx.body = {
+			code: '200',
+			message: result
+		}
+		console.log(`getCategoryList接口出参:================={code:200, message:${JSON.stringify(result)}}=============`)
+	} catch(err) {
+		ctx.body = {
+			code: '500',
+			message: err
+		}
+		console.log(`查询导航列表失败,失败原因:=================${err}=============`)
+	}
+})
+//通过一级栏目获取二级栏目
+router.post("/getCategorySubList", async(ctx) => {
+	try {
+		const CategorySub = mongoose.model("CategorySub")
+		let categoryId = ctx.request.body.categoryId
+		console.log(`接口getCategorySubList的入参:=====================${categoryId}========================`)
+		let result = await CategorySub.find({
+			MALL_CATEGORY_ID: categoryId
+		}).exec()
+		console.log(result)
+		ctx.body = {
+			code: '200',
+			message: result
+		}
+		console.log(`getCategorySubList接口出参:================={code:200, message:${JSON.stringify(result)}}=============`)
+	} catch(err) {
+		ctx.body = {
+			code: '500',
+			message: err
+		}
+		console.log(`查询导航列表失败,失败原因:=================${err}=============`)
+	}
+})
+//获取二级栏目子内容
+router.post("/getGoodsListByCategorySubID", async(ctx) => {
+	try {
+		const Goods = mongoose.model("Goods")
+		let categorySubId = ctx.request.body.categorySubId //小标题ID
+		let page = ctx.request.body.page // 当前页数
+		let num = ctx.request.body.num || 10 // 每页数量，默认10条
+		let start = (page - 1) * num
+		console.log(`接口getGoodsListByCategorySubID的入参:====================={categorySubId: ${categorySubId}, page:${page}, num: ${num}}========================`)
+		let result = await Goods.find({
+			SUB_ID: categorySubId
+		}).skip(start).limit(num).exec()
+		console.log(result)
+		ctx.body = {
+			code: '200',
+			message: result
+		}
+		console.log(`getGoodsListByCategorySubID接口出参:================={code:200, message:${JSON.stringify(result)}}=============`)
+	} catch(err) {
+		ctx.body = {
+			code: '500',
+			message: err
+		}
+		console.log(`查询导航列表失败,失败原因:=================${err}=============`)
+	}
+})
+
+
 module.exports = router

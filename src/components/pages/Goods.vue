@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="navbar-div">
+		<div class="navbar-div" >
 			<van-nav-bar title="商品详情" left-text="返回" left-arrow @click-left="onClickLeft" />
 		</div>
 		<div class="topimage-div">
@@ -9,7 +9,11 @@
 		<div class="goods-name">{{goodsInfo.NAME}}</div>
 		<div class="goods-price">价格：{{goodsInfo.PRESENT_PRICE}}</div>
 		<div>
-			<van-tabs>
+		<!--
+			swipeable 滑动效果
+			sticky 吸顶效果
+		-->
+			<van-tabs swipeable sticky >
 				<van-tab title="商品详情">
 					<div class="detail" v-html="goodsInfo.DETAIL">
 
@@ -41,12 +45,12 @@
 	export default {
 		data() {
 			return {
-				goodsId: '775e575ce28a4f89b1dfe2c99eb08ae7',
+				goodsId: '',
 				goodsInfo: {} //商品详细数据
 			}
 		},
 		created() {
-
+			this.goodsId = this.$route.params.goodsId
 			this.getInfo()
 		},
 		methods: {
@@ -54,7 +58,7 @@
 				this.$router.go(-1)
 			},
 			getInfo() {
-				console.log(url.getDetailGoodsInfo)
+
 				axios({
 						url: url.getDetailGoodsInfo,
 						method: 'post',
@@ -68,7 +72,7 @@
 						} else {
 							Toast('服务器错误，数据取得失败')
 						}
-						console.log(this.goodsInfo)
+
 					})
 					.catch(error => {
 						console.log(error)
