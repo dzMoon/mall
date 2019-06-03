@@ -8,7 +8,9 @@ const URL = {
     getDetailGoodsInfo:LOCALURL+'goods/getDetailGoodsInfo',  //商品详情接口
     getCategoryList:LOCALURL+'goods/getCategoryList',         //得到大类信息
     getCategorySubList:LOCALURL+'goods/getCategorySubList',   //得到小类列表
-    getGoodsListByCategorySubID:LOCALURL+'goods/getGoodsListByCategorySubID'   //得到小类信息
+    getGoodsListByCategorySubID:LOCALURL+'goods/getGoodsListByCategorySubID',   //得到小类信息
+    addCart:LOCALURL+'goods/addCart',   //添加购物车
+    getCartInfo:LOCALURL+'goods/getCartInfo'   //购物车信息
 
 }
 

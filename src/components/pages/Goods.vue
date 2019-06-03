@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="navbar-div" >
+		<div class="navbar-div">
 			<van-nav-bar title="商品详情" left-text="返回" left-arrow @click-left="onClickLeft" />
 		</div>
 		<div class="topimage-div">
@@ -9,11 +9,11 @@
 		<div class="goods-name">{{goodsInfo.NAME}}</div>
 		<div class="goods-price">价格：{{goodsInfo.PRESENT_PRICE}}</div>
 		<div>
-		<!--
+			<!--
 			swipeable 滑动效果
 			sticky 吸顶效果
 		-->
-			<van-tabs swipeable sticky >
+			<van-tabs swipeable sticky>
 				<van-tab title="商品详情">
 					<div class="detail" v-html="goodsInfo.DETAIL">
 
@@ -28,7 +28,7 @@
 		<div class="goods-bottom">
 
 			<div>
-				<van-button size="large" type="primary">加入购物车</van-button>
+				<van-button size="large" type="primary" @click="addGoodsToCard()">加入购物车</van-button>
 			</div>
 			<div>
 				<van-button size="large" type="danger">直接购买</van-button>
@@ -42,6 +42,7 @@
 	import axios from 'axios'
 	import url from '@/service.config.js'
 	import toMoney from '@/filter/moneyFilter.js'
+	import { Toast } from 'vant'
 	export default {
 		data() {
 			return {
@@ -77,6 +78,40 @@
 					.catch(error => {
 						console.log(error)
 					})
+			},
+			addGoodsToCard() {
+				axios({
+					url: url.getCartInfo,
+					method: 'post'
+
+				}).then(result => {
+					let isHave = result.data.message.find(item => item.goodsId == this.goodsId)
+					if(!isHave) {
+						this.addGoodsToCardItem()
+					} else {
+						Toast.fail("商品已存在")
+					}
+				}).catch(err => {
+					Toast.fail(err)
+				})
+
+			},
+			addGoodsToCardItem() {
+				axios({
+					url: url.addCart,
+					method: 'post',
+					data: {
+						goodsId: this.goodsInfo.ID,
+						Name: this.goodsInfo.NAME,
+						price: this.goodsInfo.PRESENT_PRICE,
+						image: this.goodsInfo.IMAGE1,
+						count: 1
+					}
+				}).then(result => {
+					Toast.success("添加成功")
+				}).catch(err => {
+					Toast.fail(err)
+				})
 			}
 		},
 	}

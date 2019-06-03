@@ -126,5 +126,45 @@ router.post("/getGoodsListByCategorySubID", async(ctx) => {
 	}
 })
 
+//获取购物车内容
+router.post("/getCartInfo", async(ctx) => {
+	try {
+		const cart = mongoose.model("cart")
+		let result = await cart.find().exec()
+		ctx.body = {
+			code: '200',
+			message: result
+		}
+		console.log(`getCartInfo接口出参:================={code:200, message:${JSON.stringify(result)}}=============`)
+	} catch(err) {
+		ctx.body = {
+			code: '500',
+			message: err
+		}
+		console.log(`查询购物车失败,失败原因:=================${err}=============`)
+	}
+})
+//给购物车添加内容
+router.post("/addCart", async(ctx) => {
+	try {
+		const Cart = mongoose.model("cart")
+		const newCart = new Cart(ctx.request.body)
+		console.log(`addCart接口入参:================={code:200, message:${JSON.stringify(ctx.request.body)}}=============`)
+		await newCart.save().then(() => {
+			ctx.body = {
+				code: '200',
+				message: "添加成功"
+			}
+			console.log(`addCart接口出参:================={code:200, message:添加成功}}=============`)
+		})
+
+	} catch(err) {
+		ctx.body = {
+			code: '500',
+			message: err
+		}
+		console.log(`购物车添加失败,失败原因:=================${err}=============`)
+	}
+})
 
 module.exports = router
