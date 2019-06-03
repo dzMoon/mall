@@ -1,6 +1,23 @@
 # y
 
-> 'MongoDb + vue + koa'' '
+> 技术胖商城项目模仿
+
+# npm install
+
+# cd service 
+
+# node index.js
+
+# 地址栏一次输入 
+
+# localhost:3000/goods/insertCategorySub
+
+# localhost:3000/goods/insertCategory
+
+# localhost:3000/goods/insertAllGoodsInfo
+
+# 应用技术 mongoose vant vue2 MongoDB koa2
+
 
 ## Build Setup
 
