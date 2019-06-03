@@ -5,6 +5,7 @@ import Register from '@/components/pages/Register' // 注册页面
 import Login from '@/components/pages/Login' // 登陆页面
 import Goods from '@/components/pages/Goods' // 商品详情页面
 import CategoryList from '@/components/pages/CategoryList' // 商品列表页
+import Cart from '@/components/pages/Cart' //购物车页面 
 Vue.use(Router)
 
 export default new Router({
@@ -32,6 +33,11 @@ export default new Router({
 			path: '/categoryList',
 			name: 'CategoryList',
 			component: CategoryList
+		},
+		{
+			path: '/cart',
+			name: 'Cart',
+			component: Cart
 		}
 	]
 })
