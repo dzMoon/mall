@@ -167,4 +167,27 @@ router.post("/addCart", async(ctx) => {
 	}
 })
 
+//清空购物车
+router.post("/clearCart", async(ctx) => {
+	try {
+		const Cart = mongoose.model("cart")
+		let result = await Cart.remove()
+		
+
+			ctx.body = {
+				code: '200',
+				message: "清空成功"
+			}
+			console.log(`clearCart接口出参:================={code:200, message:清空成功}}=============`)
+
+
+	} catch(err) {
+		ctx.body = {
+			code: '500',
+			message: err
+		}
+		console.log(`购物车清空失败,失败原因:=================${err}=============`)
+	}
+})
+
 module.exports = router

@@ -10,7 +10,8 @@ const URL = {
     getCategorySubList:LOCALURL+'goods/getCategorySubList',   //得到小类列表
     getGoodsListByCategorySubID:LOCALURL+'goods/getGoodsListByCategorySubID',   //得到小类信息
     addCart:LOCALURL+'goods/addCart',   //添加购物车
-    getCartInfo:LOCALURL+'goods/getCartInfo'   //购物车信息
+    getCartInfo:LOCALURL+'goods/getCartInfo',   //购物车信息
+    clearCart:LOCALURL+'goods/clearCart'   //清空购物车
 
 }
 
