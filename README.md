@@ -1,35 +1,30 @@
-# y
+# mall
 
 > 技术胖商城项目模仿
+```
+- npm install
 
-# npm install
+- cd service 
 
-# cd service 
+- node index.js
+```
+### 地址栏依次输入 
+```
+- localhost:3000/goods/insertCategorySub
 
-# node index.js
+- localhost:3000/goods/insertCategory
 
-# 地址栏一次输入 
-
-# localhost:3000/goods/insertCategorySub
-
-# localhost:3000/goods/insertCategory
-
-# localhost:3000/goods/insertAllGoodsInfo
-
-# 应用技术 mongoose vant vue2 MongoDB koa2
-
-
+- localhost:3000/goods/insertAllGoodsInfo
+```
 ## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
+```
+### serve with hot reload at localhost:8080
 npm run dev
 
 # build for production with minification
 npm run build
+
+#### 应用技术 mongoose vant vue2 MongoDB koa2
 
 # build for production and view the bundle analyzer report
 npm run build --report
